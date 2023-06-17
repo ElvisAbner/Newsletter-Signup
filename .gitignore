@@ -3,3 +3,24 @@ node_modules/
 
 # Ignore environment variables file
 .env
+
+# Ignore build artifacts
+dist/
+build/
+
+# Ignore IDE-specific files
+.vscode/
+.idea/
+
+# Ignore log files
+*.log
+
+# Ignore dependency lock files
+package-lock.json
+yarn.lock
+
+# Ignore compiled JavaScript files
+*.js
+
+# Ignore user-specific files
+.DS_Store
