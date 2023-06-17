@@ -1,11 +1,9 @@
 require('dotenv').config();
 const express = require('express');
-const mongoose = require('mongoose');
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 3000; // Set a default port if not provided
 const bodyParser = require('body-parser');
 const mailchimp = require("@mailchimp/mailchimp_marketing");
-
 
 app.use(express.static('public'));
 
@@ -14,18 +12,18 @@ app.use(bodyParser.urlencoded({
 }));
 
 mailchimp.setConfig({
-  apiKey: "995ef073e73bd5475659353d2d730782",
-  server: "us10"
+  apiKey: process.env.MAILCHIMP_API_KEY, // Use API key from environment variable
+  server: process.env.MAILCHIMP_SERVER // Use server from environment variable
 });
 
 let subscribingUser = {}; // Define subscribingUser object globally
 
-app.listen(port || 3000, () => {
-  console.log('Server Started!!!');
+app.listen(port, () => {
+  console.log(`Server started on port ${port}`);
 });
 
 app.get('/', (req, res) => {
-  res.sendFile (__dirname + '/index.html');
+  res.sendFile(__dirname + '/index.html');
 });
 
 app.post('/', async (req, res) => {
@@ -67,4 +65,3 @@ async function run() {
 app.post('/failure', (req, res) => {
   res.redirect('/');
 });
-
