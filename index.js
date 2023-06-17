@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 3000; // Set a default port if not provided
+const port = process.env.PORT || 3000;
 const bodyParser = require('body-parser');
 const mailchimp = require("@mailchimp/mailchimp_marketing");
 
@@ -12,11 +12,11 @@ app.use(bodyParser.urlencoded({
 }));
 
 mailchimp.setConfig({
-  apiKey: process.env.MAILCHIMP_API_KEY, // Use API key from environment variable
-  server: process.env.MAILCHIMP_SERVER // Use server from environment variable
+  apiKey: process.env.MAILCHIMP_API_KEY,
+  server: process.env.MAILCHIMP_SERVER 
 });
 
-let subscribingUser = {}; // Define subscribingUser object globally
+let subscribingUser = {};
 
 app.listen(port, () => {
   console.log(`Server started on port ${port}`);
@@ -36,11 +36,11 @@ app.post('/', async (req, res) => {
   console.log(subscribingUser);
 
   try {
-    await run(); // Call the run() function to add the member to the Mailchimp list
-    res.sendFile(__dirname + '/success.html'); // Send a response to the client indicating success
+    await run();
+    res.sendFile(__dirname + '/success.html');
   } catch (error) {
     console.log('Error:', error);
-    res.sendFile(__dirname + '/failure.html'); // Send an error response if something goes wrong
+    res.sendFile(__dirname + '/failure.html');
   }
 });
 
@@ -58,7 +58,7 @@ async function run() {
     console.log(`Successfully added contact as an audience member. The contact's id is ${response.id}.`);
   } catch (error) {
     console.log('Error:', error);
-    throw error; // Throw the error to be caught by the caller (app.post() handler)
+    throw error;
   }
 }
 
