@@ -19,8 +19,5 @@ build/
 package-lock.json
 yarn.lock
 
-# Ignore compiled JavaScript files
-*.js
-
 # Ignore user-specific files
 .DS_Store
